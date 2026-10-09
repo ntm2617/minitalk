@@ -6,7 +6,7 @@
 /*   By: ming <ming@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:14:22 by ming              #+#    #+#             */
-/*   Updated: 2026/10/10 00:28:19 by ming             ###   ########.fr       */
+/*   Updated: 2026/10/10 01:59:41 by ming             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,20 @@ int	main(void)
 	while (1)
 		pause();
 	return (0);
+}
+
+int swap(int *a, int *b)
+{
+	int old_a = *a;
+	
+	*a = b;
+	*b = old_a;
+}
+
+int main()
+{
+	int a;
+	int b;
+
+	swap(&a, &b);
 }
