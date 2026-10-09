@@ -6,18 +6,18 @@
 /*   By: ming <ming@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:14:22 by ming              #+#    #+#             */
-/*   Updated: 2026/04/08 17:35:11 by ming             ###   ########.fr       */
+/*   Updated: 2026/10/10 00:28:19 by ming             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <signal.h>
 
-void	ft_putnbr_fd(int n, int fd)
+void	ft_putnbr_fd(long n, int fd)
 {
-	int		a;
-	int		b;
-	char	d;
+	long		a;
+	long		b;
+	char		d;
 
 	a = n % 10;
 	b = n / 10;
@@ -40,8 +40,8 @@ void	ft_putnbr_fd(int n, int fd)
 
 void	receive(int sig)
 {
-	static int	bit;
-	static char	current_c;
+	static int				bit;
+	static unsigned char	current_c;
 
 	if (sig == SIGUSR2)
 		current_c = (current_c << 1) | 1;
@@ -50,11 +50,12 @@ void	receive(int sig)
 	bit++;
 	if (bit == 8)
 	{
-		write(1, &current_c, 1);
-		if (current_c == '\0')
-			write (1, "\n", 1);
-		bit = 0;
-		current_c = 0;
+    	if (current_c == '\0')
+        	write(1, "\n", 1);
+    	else
+        	write(1, &current_c, 1);
+    	bit = 0;
+    	current_c = 0;
 	}
 }
 

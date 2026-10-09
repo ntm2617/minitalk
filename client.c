@@ -6,7 +6,7 @@
 /*   By: ming <ming@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:14:26 by ming              #+#    #+#             */
-/*   Updated: 2026/04/08 17:56:03 by ming             ###   ########.fr       */
+/*   Updated: 2026/10/10 00:27:38 by ming             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	encoder(char c, int pid)
 			kill(pid, SIGUSR2);
 		else
 			kill(pid, SIGUSR1);
-		usleep(1800);
+		usleep(200);
 		i--;
 	}
 }
@@ -65,10 +65,10 @@ int	main(int ac, char **av)
 		return (1);
 	}
 	pid = ft_atoi(av[1]);
-	if (pid <= 0)
+	if (pid <= 0 || kill(pid, 0) == -1)
 	{
-		write (2, "Wrong PID!\n", 11);
-		return (1);
+    	write(2, "Invalid PID\n", 12);
+    	return (1);
 	}
 	while (av[2][i] != '\0')
 	{
